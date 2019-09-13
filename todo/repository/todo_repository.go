@@ -7,26 +7,20 @@ import (
 )
 
 type (
-	TodoRepository interface{
-		GetLists() ([]model.Todo, error)
-		GetOneById(id int) (model.Todo, error)
-		Post(todo model.Todo)
-		Update(todo model.Todo, id int)
-		Delete(id int)
-	}
 
-	todoRepository struct {
+	TodoRepository struct {
 		db *sql.DB
 	}
 )
 
-func NewTodoRepository(DB *sql.DB) TodoRepository {
-	repo := &todoRepository{db: DB}
+func NewTodoRepository(DB *sql.DB) *TodoRepository {
+	repo := &TodoRepository{}
+	repo.db = DB
 
 	return repo
 }
 
-func (tr *todoRepository) GetLists() ([]model.Todo, error){
+func (tr *TodoRepository) GetLists() ([]model.Todo, error){
 	var result []model.Todo
 
 	rows, err := tr.db.Query("select * from todo")
@@ -56,7 +50,7 @@ func (tr *todoRepository) GetLists() ([]model.Todo, error){
 	return result, nil
 }
 
-func (tr *todoRepository) GetOneById(id int) (model.Todo, error){
+func (tr *TodoRepository) GetOneById(id int) (model.Todo, error){
 	var result = model.Todo{}
 
 	err := tr.db.QueryRow("select * from todo where id = $1 limit 1", id).
@@ -65,7 +59,7 @@ func (tr *todoRepository) GetOneById(id int) (model.Todo, error){
 	return result, err
 }
 
-func (tr *todoRepository) Post(todo model.Todo)  {
+func (tr *TodoRepository) Post(todo model.Todo)  {
 	_, err := tr.db.Query("insert into todo (name, description, due_date) values ($1, $2, $3)", todo.Name, todo.Description, todo.DueDate)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -73,7 +67,7 @@ func (tr *todoRepository) Post(todo model.Todo)  {
 	}
 }
 
-func (tr *todoRepository) Update(todo model.Todo, id int)  {
+func (tr *TodoRepository) Update(todo model.Todo, id int)  {
 	_, err := tr.db.Query("update todo set name = $1, description = $2, due_date = $3 where id = $4", todo.Name, todo.Description, todo.DueDate, id)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -81,7 +75,7 @@ func (tr *todoRepository) Update(todo model.Todo, id int)  {
 	}
 }
 
-func (tr *todoRepository) Delete(id int)  {
+func (tr *TodoRepository) Delete(id int)  {
 	_, err := tr.db.Query("delete from todo where id = $1", id)
 	if err != nil {
 		fmt.Println(err.Error())

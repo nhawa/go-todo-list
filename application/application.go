@@ -5,10 +5,8 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
-	"github.com/sirupsen/logrus"
 	log "github.com/sirupsen/logrus"
 	"net/http"
-	"os"
 	"time"
 )
 
@@ -61,27 +59,6 @@ func (application *Application) ListenAndServe() {
 
 	application.register()
 
-	// Healtcheck
-	healthCheck := func(w http.ResponseWriter, r *http.Request) {
-		hostname, _ := os.Hostname()
-
-		err := application.ApplicationDB.Ping()
-
-		if err != nil {
-			logrus.Error("Health check: Can't connect to application Database")
-			return
-		}
-
-		err = application.ApplicationDB.Ping()
-		if err != nil {
-			logrus.Error("Health check: Can't connect to Otten Database")
-			return
-		}
-
-		fmt.Printf("Ok|%s", hostname)
-	}
-
-	r.HandleFunc("/", healthCheck).Methods("GET", "HEAD")
 	http.Handle("/", r)
 
 	var address = "localhost:8080"

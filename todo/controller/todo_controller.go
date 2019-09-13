@@ -14,14 +14,14 @@ import (
 
 type (
 	TodoController struct {
-		todoRepo         repository.TodoRepository
+		todoRepo         *repository.TodoRepository
 	}
 )
 
 
 func NewTodoController(
 	mux *mux.Router,
-	todoRepo repository.TodoRepository,
+	todoRepo *repository.TodoRepository,
 	basicMiddleware middleware.BasicMiddlewareInterface,
 ) *TodoController {
 
@@ -101,7 +101,7 @@ func (tl *TodoController) updateTodoList(w http.ResponseWriter, r *http.Request)
 	}
 	tl.todoRepo.Update(todo,id)
 
-	todoPresenter.SendSuccessResponse().JSON(w)
+	todoPresenter.SendSuccessUpdatedResponse().JSON(w)
 }
 
 func (tl *TodoController) deleteTodoList(w http.ResponseWriter, r *http.Request) {
@@ -111,5 +111,5 @@ func (tl *TodoController) deleteTodoList(w http.ResponseWriter, r *http.Request)
 	id, _ := strconv.Atoi(params["id"])
 	tl.todoRepo.Delete(id)
 
-	todoPresenter.SendSuccessResponse().JSON(w)
+	todoPresenter.SendSuccessDeletedResponse().JSON(w)
 }

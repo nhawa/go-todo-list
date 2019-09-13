@@ -9,10 +9,12 @@ import (
 const (
 	GET_TODO_NOT_FOUND_MESSAGE  string = "Failed to fetch Todo List(s) data"
 	GET_TODO_SERVER_ERROR_MESSAGE  string = "OooppS! something went wrong!!!"
-	GET_TODO_SUCCESS_MESSAGE    string = "Order(s) data fetched successfully"
+	GET_TODO_SUCCESS_MESSAGE    string = "Todo list(s) data fetched successfully"
+	GET_TODO_SUCCESS_UPDATE_MESSAGE    string = "Todo data updated successfully"
+	GET_TODO_SUCCESS_DELETE_MESSAGE    string = "Todo data deleted successfully"
 
 	GET_TODO_NOT_FOUND_CODE  int = 404
-	GET_TODO_SERVER_ERROR_CODE  int = 404
+	GET_TODO_SERVER_ERROR_CODE  int = 500
 	GET_TODO_SUCCESS_CODE  int = 200
 )
 
@@ -103,6 +105,24 @@ func (tp *TodoPresenter) SendSuccessResponse() lib.Response {
 		http.StatusNotFound,
 		GET_TODO_SUCCESS_CODE,
 		GET_TODO_SUCCESS_MESSAGE,
+		nil,
+	)
+}
+
+func (tp *TodoPresenter) SendSuccessDeletedResponse() lib.Response {
+	return lib.CreateResponse(
+		http.StatusNotFound,
+		GET_TODO_SUCCESS_CODE,
+		GET_TODO_SUCCESS_DELETE_MESSAGE,
+		nil,
+	)
+}
+
+func (tp *TodoPresenter) SendSuccessUpdatedResponse() lib.Response {
+	return lib.CreateResponse(
+		http.StatusNotFound,
+		GET_TODO_SUCCESS_CODE,
+		GET_TODO_SUCCESS_UPDATE_MESSAGE,
 		nil,
 	)
 }
