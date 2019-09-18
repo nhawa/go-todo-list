@@ -1,7 +1,9 @@
 package application
 
 import (
-	_middleware "go-todo-list/authentication/middleware"
+	_loginController "go-todo-list/authentication/controller"
+	_authRepository "go-todo-list/authentication/repository"
+	_authService "go-todo-list/authentication/service"
 	_todoController "go-todo-list/todo/controller"
 	_todoRepository "go-todo-list/todo/repository"
 )
@@ -9,9 +11,15 @@ import (
 func (application *Application) register() {
 
 	// middleware
-	basicMiddleware := _middleware.New()
+	//basicMiddleware := _middleware.New()
 	// repository
 	todoRepository := _todoRepository.NewTodoRepository(application.ApplicationDB)
+	userRepository := _authRepository.NewUserRepository(application.ApplicationDB)
+	tokenRepository := _authRepository.NewTokenRepository(application.ApplicationDB)
+	//service
+	tokenService := _authService.NewTokenService(tokenRepository)
+	authService := _authService.New(userRepository, tokenService)
 	// Delivery layer / HTTP (Controller)
-	_todoController.NewTodoController(application.mux, todoRepository, basicMiddleware)
+	_loginController.New(application.mux, authService)
+	_todoController.NewTodoController(application.mux, todoRepository)
 }

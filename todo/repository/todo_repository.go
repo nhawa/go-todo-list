@@ -7,7 +7,6 @@ import (
 )
 
 type (
-
 	TodoRepository struct {
 		db *sql.DB
 	}

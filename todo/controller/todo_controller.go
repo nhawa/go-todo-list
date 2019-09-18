@@ -22,19 +22,23 @@ type (
 func NewTodoController(
 	mux *mux.Router,
 	todoRepo *repository.TodoRepository,
-	basicMiddleware middleware.BasicMiddlewareInterface,
 ) *TodoController {
 
 	todoController := &TodoController{}
 	todoController.todoRepo = todoRepo
 
 	getTodoListHandler := http.HandlerFunc(todoController.getTodoList)
-	mux.HandleFunc("/", todoController.getTodoList).Methods("GET")
-	mux.Handle("/todo-lists", basicMiddleware.Middleware(getTodoListHandler)).Methods("GET")
-	mux.HandleFunc("/todo-lists", todoController.postTodoList).Methods("POST")
-	mux.HandleFunc("/todo-lists/{id}", todoController.getTodoListDetail).Methods("GET")
-	mux.HandleFunc("/todo-lists/{id}", todoController.updateTodoList).Methods("PUT")
-	mux.HandleFunc("/todo-lists/{id}", todoController.deleteTodoList).Methods("DELETE")
+	postTodoListHandler := http.HandlerFunc(todoController.postTodoList)
+	getTodoListDetailHandler := http.HandlerFunc(todoController.getTodoListDetail)
+	updateTodoListHandler := http.HandlerFunc(todoController.updateTodoList)
+	deleteTodoListHandler := http.HandlerFunc(todoController.deleteTodoList)
+
+	mux.Handle("/", middleware.JWT(getTodoListHandler)).Methods("GET")
+	mux.Handle("/todo-lists", middleware.JWT(getTodoListHandler)).Methods("GET")
+	mux.Handle("/todo-lists", middleware.JWT(postTodoListHandler)).Methods("POST")
+	mux.Handle("/todo-lists/{id}", middleware.JWT(getTodoListDetailHandler)).Methods("GET")
+	mux.Handle("/todo-lists/{id}", middleware.JWT(updateTodoListHandler)).Methods("PUT")
+	mux.Handle("/todo-lists/{id}", middleware.JWT(deleteTodoListHandler)).Methods("DELETE")
 
 	return todoController
 }

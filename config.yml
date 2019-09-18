@@ -1,0 +1,27 @@
+application:
+  port: 8080
+  mode: development
+  jwt:
+    secret: "ottencoffee"
+    tokenTtl: 24
+    refreshTtl: 168
+  database:
+    url: "user=otten host=localhost password=password dbname=todo_lists"
+  discount:
+    ev1:
+      amount: 10
+      max: 100000
+    ev2:
+      amount: 10
+      max: 1000000
+
+kickbox:
+  apiKey: "test_c62a8c97bffe0bda114c9494f24f5bc435238d0f2f2db731315c335e77570391"
+
+otten:
+  database:
+    url: "user=otten password=zKU4aBzMs8m57N9R host=18.139.58.236 port=5432 dbname=otten_dev sslmode=disable"
+
+otsar:
+  url: "https://139.162.47.206:8443"
+  secretKey: "a3J1aW5nYWRtaW46cjBleWtj"

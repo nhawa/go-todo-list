@@ -6,6 +6,7 @@ import (
 	"github.com/gorilla/mux"
 	_ "github.com/lib/pq"
 	log "github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 	"net/http"
 	"time"
 )
@@ -29,7 +30,7 @@ func New() ApplicationInterface {
 
 func (application *Application) loadApplicationDatabase() {
 
-	connStr := "user=otten host=localhost password=password dbname=todo_lists"
+	connStr := viper.GetString("application.database.url")
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		panic(err)
