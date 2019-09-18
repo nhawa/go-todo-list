@@ -47,7 +47,7 @@ func JWT(next http.Handler) http.Handler {
 			return
 		}
 
-		context.Set(r, "userId", token)
+		context.Set(r, "userId", claims.UserID)
 		next.ServeHTTP(w, r)
 	})
 }

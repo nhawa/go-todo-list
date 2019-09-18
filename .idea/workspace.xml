@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9aa1160-a61d-445d-8965-1e33ba431174" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/authentication/controller/login_controller.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication/model/user.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication/repository/user_repository.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication/service/login.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication/service/password.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/authentication/service/token.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/swagger/todo_ists.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/application.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/application.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/application/bootstrap.go" beforeDir="false" afterPath="$PROJECT_DIR$/application/bootstrap.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication/middleware/basic_middleware.go" beforeDir="false" afterPath="$PROJECT_DIR$/authentication/middleware/basic_middleware.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/middleware/jwt.go" beforeDir="false" afterPath="$PROJECT_DIR$/authentication/middleware/jwt.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication/service/token.go" beforeDir="false" afterPath="$PROJECT_DIR$/authentication/service/token.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/todo/controller/todo_controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/todo/controller/todo_controller.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/todo/repository/todo_repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/todo/repository/todo_repository.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

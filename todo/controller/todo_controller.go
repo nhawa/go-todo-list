@@ -47,6 +47,10 @@ func (tl *TodoController) getTodoList(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	todoPresenter := presenter.TodoPresenter{}
 	result, err := tl.todoRepo.GetLists()
+
+	//get user ID from token when at middleware
+	//userId := context.Get(r, "userId")
+
 	if err != nil {
 		fmt.Println(err.Error())
 		return

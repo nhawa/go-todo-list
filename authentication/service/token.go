@@ -79,7 +79,7 @@ func (t *tokenService) generateRefreshToken(userID int, expiration time.Time) (s
 
 	claims := JWtClaims{
 		StandardClaims: jwt.StandardClaims{
-			Issuer:    "SmartRetail",
+			Issuer:    "TodoList",
 			IssuedAt:  time.Now().Unix(),
 			ExpiresAt: expiration.Unix(),
 		},
@@ -101,7 +101,7 @@ func (t *tokenService) generateJWT(uid int, expiration time.Time) (string, error
 
 	claims := JWtClaims{
 		StandardClaims: jwt.StandardClaims{
-			Issuer:    "SmartRetail",
+			Issuer:    "TodoList",
 			IssuedAt:  time.Now().Unix(),
 			ExpiresAt: expiration.Unix(),
 		},
